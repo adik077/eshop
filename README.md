@@ -1,4 +1,3 @@
-E commerce website
 Diango based e-commerce app with below features:
 - Selecting items to buy
 - Select/updating quantity
