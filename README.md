@@ -1,7 +1,7 @@
 Diango based e-commerce app with below features:
 - Selecting items to buy
 - Select/updating quantity
-- Build in cart based on sessions
+- Built-in cart, based on sessions
 - Adding personal shipping information
 - Real payment using Braintree
 - Generating and sending invoices via mail
