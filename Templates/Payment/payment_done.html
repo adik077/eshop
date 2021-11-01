@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block title %}E-shop{% endblock %}
+{% block body %}
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Payment done successfully</h1>
+            <p class="lead text-muted">Thank You for shopping - we will immediately realize Your order</p>
+            <a href="{% url 'show_products' %}"><button type="button" class="btn btn-outline-info">Back to the shop</button></a>
+        </div>
+    </section>
+
+    <div class="album py-5 " style="background-color:#EFEFEF">
+        <div class="container">
+
+        </div>
+    </div>
+{% endblock %}

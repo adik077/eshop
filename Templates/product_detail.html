@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+{% block title %}E-shop{% endblock %}
+{% block body %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Product details</h1>
+        </div>
+    </section>
+    <div class="album py-5 " style="background-color:#EFEFEF">
+        <div class="container">
+          <div class="row">
+            <div class="col-8">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="{{product.product_img.url}}" alt="Card image cap"  height="560">
+                </div>
+            </div>
+              <div class="col-4">
+                  <div class="card mb-4 box-shadow">
+                      <div class="card-body">
+                          <p class="card-text">
+                          <h5 class="jumbotron-heading"><strong>{{product.product_name}}</strong></h5>
+                          </p>
+                          <p class="card-text">
+                          <h6 class="jumbotron-heading"><strong>{{product.price}} EUR</strong></h6>
+                          </p>
+                          <hr>
+                           <p class="card-text" style="text-align:justify">{{product.product_desc}}</p>
+                      </div>
+                  </div>
+                  <div class="card mb-4 box-shadow">
+                      <div class="card-body">
+                          {% if product.is_available %}
+                            <i class="fas fa-check-circle" style="color:green"></i>&nbsp Available |
+                          {{product.quantity}} items in stock
+                          {% else %}
+                            <i class="fas fa-times-circle" style="color:red"></i>&nbsp On the way to stock
+                          {% endif %}
+                          <br> &nbsp
+                          <div class="progress">
+                              {% if product.quantity >= 15 %}
+                                  <div class="progress-bar w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                              {% elif product.quantity < 15 and product.quantity >= 10 %}
+                                  <div class="progress-bar w-75" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                              {% elif product.quantity < 10 and product.quantity >= 5 %}
+                                  <div class="progress-bar w-50" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                              {% elif product.quantity < 5 and product.quantity > 0 %}
+                                  <div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                              {% elif product.quantity == 0 %}
+                                  <div class="progress-bar bg-danger w-0" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                              {% endif %}
+                          </div>
+                          {% if product.quantity == 0 %}
+                            <p class="card-text" style="font-size:12px; text-align:justify">*You can order this product even if is unavailable - please consider that we will send it to You when we will have it in the stock</p>
+                          {% endif %}
+                          {% if product.quantity > 0 and product.quantity < 5 %}
+                            <p class="card-text" style="font-size:12px; text-align:justify">*You can order more products than are on the stock - please consider then, that order will be send to You when we will complete it</p>
+                          {% endif %}
+                      </div>
+                  </div>
+                  <div class="card mb-4 box-shadow">
+                      <div class="card-body">
+                          {% if product.id in products_in_cart %}
+                            <button type="button" class="btn btn-sm btn-primary disabled">Added to Cart</button>&nbsp
+                          {% else %}
+                            <form method="POST" action="{% url 'cart_add' product.id %}">
+                                <div class="row">
+                                    <div class="col">
+                                {{form}}
+                                    </div>
+                                {% csrf_token %}
+                                    <div class="col">
+                                <button type="submit" class="btn btn-bg btn-warning" style="float:right">Add to cart</button>
+                                    </div>
+                                </div>
+                            </form>
+                          
+                          {% endif %}
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

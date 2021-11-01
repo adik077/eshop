@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% block title %}E-shop{% endblock %}
+{% block body %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">All brands shop</h1>
+          <p class="lead text-muted">Best stuff selected especially for You. <br>Let yourself be drawn into the search of the best products,<br>and get it simply for You or Your relatives...</p>
+
+        </div>
+    </section>
+    <div class="album py-5 " style="background-color:#EFEFEF">
+        <div class="container">
+
+          <div class="row">
+            {% for product in products %}
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src="{{product.product_img.url}}" alt="Card image cap"  height="260">
+                  <div class="card-body">
+                    <p><h6><a href="{% url 'product_detail' product.id %}" style="text-decoration:none;color:gray">{{product.product_name}}</a></h6></p>
+                      {% if product.is_available %}
+                            <i class="fas fa-check-circle" style="color:green"></i>&nbsp Available
+                          {% else %}
+                            <i class="fas fa-times-circle" style="color:red"></i>&nbsp On the way to stock
+                          {% endif %}
+                    <hr>
+                    <p class="card-text">{{product.product_desc|slice:"100"}}...</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                                {% if product.id in products_in_cart %}
+                                    <button type="button" class="btn btn-sm btn-primary disabled">Added to Cart</button>&nbsp
+                                {% else %}
+                                    <a href="{% url 'cart_add' product.id %}"><button type="button" class="btn btn-sm btn-warning">Add to Cart</button></a>&nbsp
+                                {% endif %}
+                          <a href="{% url 'product_detail' product.id %}"><button type="button" class="btn btn-sm btn-outline-primary">Details</button></a>
+                      </div>
+                      <small class="text-muted"><strong>{{product.price}} EUR</strong></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+{% endblock %}

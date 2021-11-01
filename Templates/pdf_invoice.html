@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+
+    <style type="text/css">
+        .lead{
+            font-size:1.25rem;
+            font-weight:300
+            }
+        .alert{
+            position:relative;
+            padding:1rem 1rem;
+            margin-bottom:1rem;
+            border:1px solid transparent;
+            border-radius:.25rem
+            }
+        .alert-dark{
+            color:#141619;
+            background-color:#d3d3d4;
+            border-color:black
+            }
+        .container{
+            width:100%;
+            padding-right:var(--bs-gutter-x,.75rem);
+            padding-left:var(--bs-gutter-x,.75rem);
+            margin-right:auto;
+            margin-left:auto
+            }
+
+            table,th,td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-top:5px;
+            padding-bottom:5px;
+            text-align:center;
+            }
+
+            tr:nth-child(odd) {
+                background-color: red;
+            }
+
+
+    </style>
+</head>
+<body>
+
+<h1>E-shop</h1>
+<p class="lead">Order number: {{order_number}}</p>
+<br><br>
+
+<div class="alert alert-dark" role="alert">
+    <h2 style="text-align:center">PAID</h2>
+</div>
+
+<br>
+<div id="container">
+    <h3>Customer:</h3>
+    Name: {{name}}<br>
+    Surname: {{surname}}<br>
+    E-mail: {{email}}<br>
+    Phone: {{phone}}<br>
+    Address: {{address}}<br><br><br><br>
+</div>
+<div>
+    <table>
+
+    <tr style="background-color:#d3d3d4">
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+  <tbody>
+  {% for item in order_items %}
+    <tr>
+      <td>{{item.product.product_name}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.get_cost}}</td>
+    </tr>
+  {% endfor %}
+    <tr>
+        <td colspan="2"></td>
+
+      <th style="background-color:#d3d3d4">Total cost</th>
+      <th style="background-color:#d3d3d4">{{total_sum}}</th>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+Thank You for shopping with us. In case of any questions, please do not hesitate to contact us...
+
+
+
+
+</body>
+</html>

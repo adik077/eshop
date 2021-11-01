@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% block title %}E-shop{% endblock %}
+{% block body %}
+
+{% load static %}
+ <link href="{% static 'style2.css' %}" rel="stylesheet">
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Congrats - Order Placed!!!</h1>
+            Your Order number is {{order_id}}
+        </div>
+    </section>
+    <div class="album py-5 " style="background-color:#EFEFEF">
+        <div class="container">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-8 cart">
+                            <div class="title">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4><b>Payment</b></h4>
+                                        Thank You for submiting order. To finish transaction, please make a payment...
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-4 summary">
+                            <div>
+                                <h5><b>Next Step</b></h5>
+                            </div>
+                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                <a href="{% url 'payment' %}"><button type="button" class="btn btn-dark">Make a Payment &nbsp<i class="fas fa-credit-card"></i></button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+      </div>
+
+
+{% endblock %}
+
+
+

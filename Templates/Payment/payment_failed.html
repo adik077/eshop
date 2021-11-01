@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block title %}E-shop{% endblock %}
+{% block body %}
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Payment failed</h1>
+            <p class="lead text-muted">Unfortunately the payment error occurred. We are sorry about that. Try to make payment one more time or contact us</p>
+            <a href="{% url 'show_products' %}"><button type="button" class="btn btn-outline-danger">Back to the shop</button></a>
+        </div>
+    </section>
+
+    <div class="album py-5 " style="background-color:#EFEFEF">
+        <div class="container">
+
+        </div>
+    </div>
+
+{% endblock %}

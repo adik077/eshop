@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% block title %}E-shop{% endblock %}
+{% block body %}
+
+{% load static %}
+ <link href="{% static 'style2.css' %}" rel="stylesheet">
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Shipping form</h1>
+        </div>
+    </section>
+    <div class="album py-5 " style="background-color:#EFEFEF">
+        <div class="container">
+            <form method="POST">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-8 cart">
+                            <div class="title">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4><b>Your details</b></h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                {% csrf_token %}
+                                {{form}}
+
+
+
+                            <div class="back-to-shop"><a href="{% url 'cart_summary' %}" style="text-decoration:none;"><span class="text-muted"><i class="fas fa-arrow-left"></i>&nbspBack to cart</span></a></div>
+                        </div>
+                        <div class="col-md-4 summary">
+                            <div>
+                                <h5><b>Summary</b></h5></br>
+                            </div>
+                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                <div class="col">ITEMS IN CART:</div>
+                                <div class="col text-right"> {{total_items}}</div>
+                            </div>
+
+                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                <div class="col">TOTAL PRICE</div>
+                                <div class="col text-right">{{total_price}} EUR</div></br></br>
+                                <button type="submit" class="btn btn-dark">Submit Order &nbsp<i class="fas fa-clipboard-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+      </div>
+
+
+{% endblock %}
+
+
+

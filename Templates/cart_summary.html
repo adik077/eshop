@@ -1,0 +1,101 @@
+{% extends 'main.html' %}
+{% block title %}E-shop{% endblock %}
+{% block body %}
+
+{% load static %}
+ <link href="{% static 'style2.css' %}" rel="stylesheet">
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Your Cart</h1>
+        </div>
+    </section>
+    <div class="album py-5 " style="background-color:#EFEFEF">
+        <div class="container">
+
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-8 cart">
+                        <div class="title">
+                            <div class="row">
+                                <div class="col">
+                                    <h4><b>Cart Summary</b></h4>
+                                </div>
+                                <div class="col align-self-center text-right text-muted">{{total_items}} items</div>
+                            </div>
+                        </div>
+
+                        {% for item in cart %}
+                        <div class="row border-top border-bottom">
+                            <div class="row main align-items-center">
+                                <div class="col-2"><img class="img-fluid" src="{{item.product.product_img.url}}"></div>
+                                <div class="col-3" style="text-align:left">
+                                    <div class="row"><a href="{% url 'product_detail' item.product.id %}" class="text-muted" style="text-decoration:none;padding:0">{{item.product.product_name}}</a></div>
+                                    <div class="row">{{item.product.product_desc|slice:"15"}}...</div>
+                                </div>
+
+                                <div class="col-4">
+                                    <!--{{item.quantity|linebreaksbr}}-->
+                                    <form method="POST" action="{% url 'cart_add' item.product.id %}" >
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p style="width:100%">
+                                                {{item.update_quantity}}
+                                                {% csrf_token %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-sm btn-warning" style="width:100%">Update QTY</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+
+                                <div class="col">
+                                    <a href="{% url 'cart_remove' item.product.id %}"><i class="far fa-trash-alt"></i></a>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="row2 text-muted" >{{item.total_price}} EUR</div>
+                                    <div class="row2 text-muted" >({{item.quantity}} items)</div>
+                                    <div class="row2">{{item.price}} EUR</div>
+                                    <div class="row2">(item)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+
+                        <div class="back-to-shop"><a href="{% url 'show_products' %}" style="text-decoration:none;"><span class="text-muted"><i class="fas fa-arrow-left"></i>&nbspBack to shop</span></a></div>
+                    </div>
+                    <div class="col-md-4 summary">
+                        <div>
+                            <h5><b>Summary</b></h5></br>
+                        </div>
+                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="col">ITEMS IN CART:</div>
+                            <div class="col text-right"> {{total_items}}</div>
+                        </div>
+
+                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="col">TOTAL PRICE</div>
+                            <div class="col text-right">{{total_price}} EUR</div></br></br>
+                            {% if total_price > 0 %}
+                                <a href="{% url 'shipping_form' %}"><button type="button" class="btn btn-dark">Continue &nbsp<i class="fas fa-forward"></i></button></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+
+
+{% endblock %}
+
+
+
